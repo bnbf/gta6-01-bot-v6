@@ -173,7 +173,12 @@ function runTests() {
   check('traffic-spawns', () => G.cars.filter((c) => c.kind === 'traffic').length >= 20);
   check('parked-cars', () => G.cars.filter((c) => c.kind === 'parked').length >= 10);
   check('peds-spawn', () => G.peds.length >= 20);
-  check('mission-1-active', () => startMission(G, 0) && G.mission && G.mission.index === 0);
+  check('mission-1-active', () => {
+    if (!startMission(G, 0) || !G.mission || G.mission.index !== 0) return false;
+    step(1);
+    // The HUD objective must name the step, never "undefined".
+    return typeof G.objectiveText === 'string' && G.objectiveText.includes('First Wheels') && !G.objectiveText.includes('undefined');
+  });
   check('player-walks', () => {
     const x0 = G.player.x;
     step(60, sim({ move: { x: 1, y: 0 } }));

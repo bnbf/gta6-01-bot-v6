@@ -17,7 +17,7 @@ export function missionDefs(city) {
   const P = city.places;
   return [
     { name: MISSION_NAMES[0], giver: 'Vera Solano', brief: 'Steal a car and bring it to Volt Garage.', reward: 300,
-      steps: [{ kind: 'steal-any' }, { kind: 'deliver', to: P.garage }] },
+      steps: [{ kind: 'steal-any', label: 'Steal any car' }, { kind: 'deliver', to: P.garage, label: 'Bring it to Volt Garage' }] },
     { name: MISSION_NAMES[1], giver: 'Vera Solano', brief: 'Pick up the package at the Neon Diner, deliver it to the pier in 90 seconds.', reward: 400,
       steps: [{ kind: 'goto', to: P.diner, label: 'Pick up the package' }, { kind: 'deliver', to: P.pier, label: 'Deliver to the pier', time: 90 }] },
     { name: MISSION_NAMES[2], giver: 'Big Lou', brief: 'Collect protection money from three shops. Press E at each one.', reward: 450,
